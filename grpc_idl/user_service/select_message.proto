@@ -1,0 +1,42 @@
+syntax='proto3';
+
+
+
+enum UserSelectField {
+	USER_NAME=0;
+	USER_EMAIL=1;
+	USER_UUID=2;
+}
+
+enum BinraryEncoding {
+	BIG_ENDIAN=0;
+	LITTLE_ENDIAN=1;
+}
+
+
+message UserSelectMessage {
+	oneof key {
+		string UUID = 1;
+		string User_email = 2;
+		string user_name = 3;
+	}
+}
+
+message UserSelectResponse {
+	message SelectElement {
+		UserSelectField field = 1;
+		BinraryEncoding encoding = 2;
+		bytes data=3;		
+	}
+	message SucceeResponse {
+		repeated SelectElement = 1;		
+	}
+	message FailResponse {
+		string errorCode=1;
+		string etc_message=2;
+	}
+	oneof response {
+		SucceeResponse succee=1;
+		FailResponse fail=2;
+	}
+}

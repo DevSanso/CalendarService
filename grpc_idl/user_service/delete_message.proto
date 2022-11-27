@@ -1,0 +1,24 @@
+syntax='proto3';
+
+
+
+message UserDeleteMessage {
+	string UUID = 1;
+}
+
+
+message UserDeleteResponse {
+	message SucceeResponse {
+		string UUID=1;
+		string etc_message=2;
+	}
+	message FailResponse {
+		int32 errorCode=1;
+		string error_message = 2;
+	}
+
+	oneof response {
+		SucceeResponse succee=1;
+		FailResponse fail=2;
+	}
+}

@@ -1,0 +1,24 @@
+syntax='proto3';
+
+
+message UserCreateMessage {
+	string email = 1;
+	string password = 2;
+	string name = 3;
+}
+
+
+message UserCreateResponse {
+	message SucceeResponse {
+		String UUID=1;
+	}	
+	message FailResponse {
+		int32 code=1;
+		String error_message=2;
+	}
+	oneof response {
+		SucceeResponse succee=1;
+		FailResponse fail=2;
+	}
+}
+

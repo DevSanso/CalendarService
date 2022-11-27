@@ -1,0 +1,12 @@
+import './create_message.proto';
+import './delete_message.proto';
+import './select_message.proto';
+import './update_message.proto';
+
+
+service UserService {
+	rpc CreateUser (UserCreateMessage) returns (UserCreateResponse) {}
+	rpc DeleteUser (UserDeleteMessage) returns (UserDeleteResponse) {}
+	rpc SelectUser (UserSelectMessage) returns (UserSelectResponse) {}
+	rpc UpdateUser (UserUpdateMessage) returns (UserUpdateResponse) {}
+}
