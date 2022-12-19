@@ -1,11 +1,12 @@
 import json
 import os
-import env
+import benv
 import copy
-
+from abc import abstractmethod
 
 class Config(object):
-    def __set_config_field(self, obj : object):
+    @abstractmethod
+    def __set_config_field(self, obj : dict):
         raise Exception('config.py - __set_config_field : not implement method __Config class')
     def __init__(self,path : str):
         try:
@@ -16,17 +17,18 @@ class Config(object):
         self.__set_config_field(obj)
 
 
-class __BuildConfig(Config):
-    def __set_config_field(self, obj : object):
-        self.grpc = {}
-        copy.deepcopy(self.grpc, obj.grpc)
+class BuildConfig(Config):
+    grpc : dict = {}
+
+    def __set_config_field(self, obj :dict):
+        copy.deepcopy(self.grpc, obj['grpc'])
 
     
 
- def __init_build_config(s : str):
-    return __BuildConfig(s)
+def __init_build_config(s : str):
+    return BuildConfig(s)
 
-BUILD_CONFIG =  __init_build_config('%s/config/build.json' % env.ROOT_WORKSPACE)
+BUILD_CONFIG = __init_build_config('%s/config/build.json' % benv.ROOT_WORKSPACE)
 
 
 
